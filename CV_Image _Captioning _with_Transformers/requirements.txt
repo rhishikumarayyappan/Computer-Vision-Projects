@@ -1,0 +1,7 @@
+tensorflow
+tensorflow-datasets
+seaborn
+matplotlib
+numpy
+opencv-python-headless
+tqdm
