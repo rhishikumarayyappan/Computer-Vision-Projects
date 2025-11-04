@@ -45,16 +45,18 @@ This pipeline was validated on the COCO128 dataset, achieving strong benchmark p
 
 ---
 
+
 ## Visuals
 
 -   **Training & Validation Metrics:** Plots showing mAP and loss curves, confirming the model learned effectively.
 -   **Confusion Matrix:** A detailed breakdown of model accuracy and confusion between classes.
 -   **Sample Detections:** Example outputs from the trained model running on test images.
 
-![Training Results](training_results.jpg)
-![Confusion Matrix](confusion_matrix.jpg)
-![Sample Detection 1](sample1.jpg)
-![Sample Detection 2](sample2.jpg)
+![Training Results](images/training_results.jpg)
+![Confusion Matrix](images/confusion_matrix.jpg)
+![Sample Detection 1](images/sample1.jpg)
+![Sample Detection 2](images/sample2.jpg)
+
 
 ---
 
