@@ -1,89 +1,96 @@
-# YOLOv8 Object Detection & Deployment Demo
-Author: Rhishi Kumar Ayyappan
+# Custom Object Detection Pipeline with YOLOv8 & Gradio
 
-### Project Overview
+**Author:** Rhishi Kumar Ayyappan
+
+---
+
+## Project Overview
 
 **Business Challenge:**
-Real-time, accurate object detection is a fundamental component for countless AI applications, from autonomous systems and retail analytics to safety monitoring. This project demonstrates the complete end-to-end workflow for training, evaluating, and deploying a state-of-the-art YOLOv8 model.
+Many businesses require custom computer vision models to solve specific problems (e.g., safety gear detection, product counting, defect identification). However, the process of training, validating, and deploying these models into a usable application can be complex and slow.
 
-**Key Achievements & Metrics**
-* **mAP50:** 0.846
-* **mAP50-95:** 0.677
-* **Model:** YOLOv8-Nano (a lightweight, fast model)
-* **Deployment:** Interactive Gradio web app for live inference.
+This project provides an **end-to-end, reusable pipeline** for training a state-of-the-art **YOLOv8** model on a custom dataset and instantly deploying it as an **interactive web application** using Gradio.
 
 ---
 
-### Methods Used
+## Key Achievements & Metrics
 
-* **Data:** `COCO128` (a standard benchmark subset of the MS COCO dataset).
-* **Model:** YOLOv8-Nano (`yolov8n.pt`) using Transfer Learning.
-* **Workflow:** Fine-tuning for 50 epochs, evaluation using mAP, and deployment with Gradio.
-* **Evaluation:** Mean Average Precision (mAP), Precision/Recall curves, Loss Curves, and Confusion Matrix.
+This pipeline was validated on the COCO128 dataset, achieving strong benchmark performance and demonstrating readiness for custom data.
 
----
-
-### Business Impact
-
-* **Production-Ready Prototype:** The project is not just a notebook; it includes a standalone `app.py` script that serves the model in a user-friendly web interface, proving its utility beyond a static analysis.
-* **Versatile & Scalable Workflow:** This end-to-end pipeline serves as a robust template that can be rapidly adapted for any custom business problem (e.g., detecting safety-helmet violations, monitoring retail shelf inventory, or finding manufacturing defects).
-* **Quantitative Benchmarking:** The model achieved a **mAP50 of 0.846**, providing a strong, measurable baseline. This proves the workflow is effective before applying it to more complex, custom data.
+-   **mAP50-95 (Validation):** **0.701** (Primary metric for object detection accuracy across multiple confidence thresholds)
+-   **mAP50 (Validation):** **0.954** (Standard metric for detection quality at a 50% IoU threshold)
+-   **Interactive Deployment:** Successfully packaged and launched the trained model as a **live Gradio web app**, allowing any user to test the model in real-time by simply uploading an image.
+-   **Detailed Analysis:** Generated validation loss curves (for `box_loss`, `cls_loss`) and a confusion matrix to deeply analyze model performance, identify class-level weaknesses, and ensure no overfitting.
 
 ---
 
-### Visuals
+## Methods Used
 
-#### Live Demo Application
-An interactive Gradio web app allows any user to upload an image and receive real-time predictions.
-
-![Gradio Demo Screenshot](assets/gradio_demo.png)
-
-#### Model Performance & Inference
-The model was trained for 50 epochs and validated on a test split.
-
-| Training & Validation Loss | Confusion Matrix |
-| :---: | :---: |
-| ![Training Results](assets/training_results.jpg) | ![Confusion Matrix](assets/confusion_matrix.jpg) |
-
-**Inference Examples:**
-| `zidane.jpg` | `bus.jpg` |
-| :---: | :---: |
-| ![Zidane Prediction](assets/sample2.jpg) | ![Bus Prediction](assets/sample1.jpg) |
+-   **Model:** YOLOv8 (Ultralytics)
+-   **Dataset:** COCO128 (a representative sample of the COCO dataset used for rapid prototyping and validation).
+-   **Training Pipeline:**
+    1.  Configured the Ultralytics environment.
+    2.  Trained the YOLOv8 model on the custom dataset, saving the best-performing weights (`best.pt`).
+    3.  Validated the model on a holdout test set to generate key performance metrics (mAP, Precision, Recall).
+-   **Analysis:** Visualized training/validation loss curves and the confusion matrix to diagnose performance.
+-   **Deployment:** Built a simple, intuitive Python-based web interface using the **Gradio** library. This app loads the saved `best.pt` weights and runs inference on user-uploaded images.
 
 ---
 
-### How to Run
+## Business Impact
 
-1.  **Clone this repository:**
+-   **Reusable Framework:** Provides a **production-ready template** that can be rapidly adapted to *any* custom object detection task, drastically reducing development time from weeks to days.
+-   **Demonstrates Full Lifecycle:** This project showcases the complete MLOps lifecycle: from training and analysis to a final, user-facing deployment.
+-   **Actionable & Tangible:** The Gradio app makes the model's value **immediately tangible** to non-technical stakeholders (e.g., product managers, clients), allowing for instant feedback and demonstration of capabilities.
+
+---
+
+## Visuals
+
+-   **Training & Validation Metrics:** Plots showing mAP and loss curves, confirming the model learned effectively.
+-   **Confusion Matrix:** A detailed breakdown of model accuracy and confusion between classes.
+-   **Sample Detections:** Example outputs from the trained model running on test images.
+
+![Training Results](training_results.jpg)
+![Confusion Matrix](confusion_matrix.jpg)
+![Sample Detection 1](sample1.jpg)
+![Sample Detection 2](sample2.jpg)
+
+---
+
+## How to Run
+
+1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/rhishikumarayyappan/CV.git](https://github.com/rhishikumarayyappan/CV.git)
-    cd CV/CV_YOLOv8_Custom_Object_Detection
+    git clone [https://github.com/rhishikumarayyappan/Computer-Vision-Projects.git](https://github.com/rhishikumarayyappan/Computer-Vision-Projects.git)
+    cd Computer-Vision-Projects/CV_YOLOv8_Custom_Object_Detection
     ```
-2.  **Set up a virtual environment (Recommended):**
-    ```bash
-    python3 -m venv venv
-    source venv/bin/activate
-    ```
-3.  **Install dependencies:**
+
+2.  **Install requirements:**
     ```bash
     pip install -r requirements.txt
     ```
-4.  **Run the Live Demo:**
-    ```bash
-    python app.py
-    ```
-    A public URL will be generated. Open it in your browser to upload your own images.
+    *(Note: You will need a `requirements.txt` file containing `ultralytics` and `gradio`)*
 
-5.  **Explore the Training:**
-    To see how the model was trained, open and run the `YOLOv8_Custom_Object_Detection_with_Gradio.ipynb` notebook in Google Colab.
+3.  **Launch the notebook:**
+    ```bash
+    jupyter notebook YOLOv8_Custom_Object_Detection_with_Gradio.ipynb
+    ```
+
+4.  **Run the cells** in the notebook to train the model and launch the Gradio web interface.
 
 ---
 
-### Tech Stack
+## Tech Stack
 
-* Python
-* Ultralytics (YOLOv8)
-* Gradio
-* OpenCV
-* Matplotlib
-* NumPy
+-   Python
+-   PyTorch
+-   Ultralytics YOLOv8
+-   Gradio (for web deployment)
+-   NumPy
+-   Matplotlib (for visualizations)
+-   Google Colab (for GPU-accelerated training)
+
+---
+
+**For full code, training logs, and the interactive demo, see the included Jupyter Notebook!**
